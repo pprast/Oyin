@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мен кіммін? — Қазақ кейіпкерлері</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 Мен кіммін?</h1>
+            <p class="subtitle">Қазақ әдебиеті кейіпкерлері ойыны</p>
+        </header>
+
+        <!-- Баптау бөлімі -->
+        <div id="setup" class="setup-panel">
+            <div class="form-group">
+                <label for="classSelect">📚 Сынып таңдаңыз:</label>
+                <select id="classSelect">
+                    <option value="7">7-сынып</option>
+                    <option value="8">8-сынып</option>
+                    <option value="9">9-сынып</option>
+                    <option value="10">10-сынып</option>
+                    <option value="11">11-сынып</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="termSelect">📅 Тоқсан таңдаңыз:</label>
+                <select id="termSelect">
+                    <option value="1">1-тоқсан</option>
+                    <option value="2">2-тоқсан</option>
+                    <option value="3">3-тоқсан</option>
+                    <option value="4">4-тоқсан</option>
+                </select>
+            </div>
+
+            <button id="startBtn" class="btn btn-primary">➡️ Келесі</button>
+        </div>
+
+        <!-- Ойыншыларды қосу бөлімі -->
+        <div id="playerSetup" class="setup-panel hidden">
+            <h2>👥 Ойыншыларды басқару</h2>
+            
+            <div class="form-group">
+                <label for="playerName">👤 Ойыншы атын енгізіңіз:</label>
+                <div class="input-group">
+                    <input type="text" id="playerName" placeholder="Мысалы: Арман" maxlength="20">
+                    <button id="addPlayerBtn" class="btn btn-secondary">➕ Қосу</button>
+                </div>
+            </div>
+
+            <div class="players-list">
+                <h3>Қосылған ойыншылар:</h3>
+                <ul id="playersList"></ul>
+                <p class="player-count">Барлығы: <span id="playerCount">0</span> ойыншы</p>
+                <button id="clearAllBtn" class="btn btn-warning">🗑️ Барлығын тазалау</button>
+            </div>
+
+            <div class="setup-controls">
+                <button id="backToSetupBtn" class="btn btn-secondary">⬅️ Артқа</button>
+                <button id="startGameBtn" class="btn btn-primary" disabled>🎮 Ойынды бастау</button>
+            </div>
+        </div>
+
+        <!-- Ойын бөлімі -->
+        <div id="game" class="game-panel hidden">
+            <div class="game-header">
+                <div class="player-info">
+                    <h2 id="currentPlayerName">Арман</h2>
+                    <p class="player-turn">Кезек: <span id="playerTurn">1/6</span></p>
+                </div>
+                <div class="round-info">
+                    <h3 id="roundHeader">1-раунд / 5</h3>
+                    <div class="timer-display" id="timerDisplay">
+                        5:00
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-display">
+                <div id="character" class="character-name hidden-text">
+                    Алпамыс
+                </div>
+                <div class="character-hint">
+                    📱 Телефонды маңдайыңызға қойыңыз
+                </div>
+            </div>
+
+            <div class="game-controls">
+                <button id="revealBtn" class="btn btn-secondary">👁️ Кейіпкерді көрсету</button>
+                <button id="startTimerBtn" class="btn btn-info">⏰ Таймерді бастау</button>
+                <button id="guessedBtn" class="btn btn-success" disabled>✅ Табылды!</button>
+                <button id="nextRoundBtn" class="btn btn-warning" disabled>➡️ Келесі раунд</button>
+            </div>
+
+            <div class="game-info">
+                <div class="round-points">
+                    <span id="currentPoints">Ағымдағы раунд: 10 ұпай • Уақыт: 5 минут</span>
+                </div>
+                <div class="instructions">
+                    <p>📝 <strong>Ойын ережелері:</strong></p>
+                    <ul>
+                        <li>1-раунд: 5 минут - 10 ұпай</li>
+                        <li>2-раунд: 4 минут - 8 ұпай</li>
+                        <li>3-раунд: 3 минут - 6 ұпай</li>
+                        <li>4-раунд: 2 минут - 4 ұпай</li>
+                        <li>5-раунд: 1 минут - 2 ұпай</li>
+                        <li>5 раундта таба алмаса - 0 ұпай</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Нәтижелер кестесі -->
+        <div id="results" class="results-panel hidden">
+            <h2>🏆 Ойын нәтижелері</h2>
+            
+            <div class="results-table">
+                <table id="scoreTable">
+                    <thead>
+                        <tr>
+                            <th>Орын</th>
+                            <th>Ойыншы</th>
+                            <th>Ұпай</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoreTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="final-controls">
+                <button id="newGameBtn" class="btn btn-primary">🆕 Жаңа ойын</button>
+                <button id="changePlayersBtn" class="btn btn-secondary">👥 Ойыншыларды өзгерту</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
