@@ -1,11 +1,11 @@
 // --- Жақсартылған ойын логикасы ---
-// localStorage-мен деректерді сақтау, ойыншыларды жою/қосу, таймер басқару
+// Рандомайзер, персонаж бір раундта тұрақты, таймер тексту жоңгартылған
 
 defineCharacters = () => ({
-  7: {1:["Қобыланды","Алпамыс","Қыз Жібек"],2:["Ер Төстік","Асан Қайғы","Кенесары"],3:["Төлеген","Сансызбай","Бекежан"],4:["Батыр Баян","Ер Тарғын","Қорқыт"]},
+  7: {1:["Бауыржан Момышұлы","Момыналы (Момыш)","Қызтумас","Рәзия (Бауыржанның анасы)","Қозы","Баян сұлу","Қарабай","Сарыбай","Қодар","Айбас"],2:["Ер Төстік","Асан Қайғы","Кенесары"],3:["Төлеген","Сансызбай","Бекежан"],4:["Батыр Баян","Ер Тарғын","Қорқыт"]},
   8: {1:["Абай","Айгерім","Көжек Жиренше"],2:["Махамбет","Исатай","Сырым батыр"],3:["Шоқан Уәлиханов","Ыбырай Алтынсарин","Сәкен Сейфуллин"],4:["Мыржақып Дулатов","Мұхтар Әуезов","Магжан Жұмабаев"]},
   9:{1:["Кенесары","Жәнібек хан","Абылай хан"],2:["Қарагөз","Қарашаш","Қодар"],3:["Жетім Кекіл","Жүз Жылдық Жалғыздық","Сұлтан Бейбарыс"],4:["Қорқыт","Әлихан Бөкейхан","Ахмет Байтұрсынұлы"]},
-  10:{1:["Ильяс Есенберлин","Қаһар","Жанталас"],2:["Габит Мүсірепов","Гүлнар","Қозы Көрпеш"],3:["Олжас Сүлейменов","Ази және Я"],4:["Тыныштықбек Әбдікәкімұлы","Қаратастан"]},
+  10:{1:["Ільяс Есенберлин","Қаһар","Жанталас"],2:["Ғабит Мүсірепов","Гүлнар","Қозы Көрпеш"],3:["Олжас Сүлейменов","Ази және Я"],4:["Тыныштықбек Әбдікәкімұлы","Қаратастан"]},
   11:{1:["Роллан Сейсенбаев","Амангелді Иманов"],2:["Дулат Исабеков","Батырхан"],3:["Әсет Найманбайұлы","Жамбыл Жабаев"],4:["Фариза Оңғарсынова","Шәмші Қалдаяқов"]}
 });
 
@@ -138,6 +138,11 @@ function shuffle(arr) {
     return arr.map(v=>({v, sort:Math.random()})).sort((a,b)=>a.sort-b.sort).map(({v})=>v);
 }
 
+function randomCharacter(characters) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
+}
+
 // --- Ойын логикасы ---
 function nextPlayer() {
     ch = defineCharacters();
@@ -147,6 +152,10 @@ function nextPlayer() {
     timerRunning = false;
     currentPlayerName.textContent = playerNames[currentPlayerIdx];
     playerTurn.textContent = `${currentPlayerIdx+1}/${playerNames.length}`;
+    
+    // Жаңа ойыншы үшін жаңа кейіпкер таңдау
+    currentChar = randomCharacter(deck);
+    
     startRound();
 }
 
@@ -157,7 +166,12 @@ function startRound() {
         return;
     }
     
-    currentChar = deck.pop();
+    // Тек 1-раундта ғана жаңа кейіпкер таңдау
+    if (round === 1 && currentChar === undefined) {
+        currentChar = randomCharacter(deck);
+    }
+    // 2-5 раундтарда кейіпкер сол бойынша қалады
+    
     roundHeader.textContent = `${round}-раунд / 5`;
     charBox.textContent = currentChar;
     charBox.classList.add("hidden-text");
@@ -165,6 +179,7 @@ function startRound() {
     // Кнопкаларды баптау
     revealBtn.disabled = false;
     startTimerBtn.disabled = false;
+    startTimerBtn.textContent = "⏰ Таймерді бастау"; // Мәтінді қалпына келтіру
     guessedBtn.disabled = true;
     nextRoundBtn.disabled = true;
     
@@ -200,6 +215,7 @@ function startTimer() {
             guessedBtn.disabled = true;
             nextRoundBtn.disabled = false;
             startTimerBtn.textContent = "⏰ Уақыт бітті!";
+            startTimerBtn.disabled = true;
         } else if (timeLeft <= 30) {
             timerDisplay.classList.add("warning");
         }
@@ -247,6 +263,8 @@ function nextPlayerTurn() {
     
     if (currentPlayerIdx + 1 < playerNames.length) {
         currentPlayerIdx++;
+        // Келесі ойыншы үшін кейіпкерді анықтамау (nextPlayer функциясында орындалады)
+        currentChar = undefined;
         setTimeout(() => {
             game.classList.remove('hidden');
             nextPlayer();
@@ -276,6 +294,7 @@ newGameBtn.onclick = () => {
     
     // Тек ойынды ысыру, ойыншылар қалады
     currentPlayerIdx = 0;
+    currentChar = undefined;
     if (timer) clearInterval(timer);
     timerRunning = false;
 };
