@@ -748,7 +748,7 @@ select.form-control {
 
 body {
     font-family: var(--font-family-base);
-    background: var(--color-background);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-active) 100%);
     min-height: 100vh;
     color: var(--color-text);
     line-height: var(--line-height-normal);
@@ -772,15 +772,15 @@ header {
 
 header h1 {
     font-size: var(--font-size-4xl);
-    color: var(--color-text);
+    color: var(--color-white);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     margin-bottom: var(--space-10);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: var(--letter-spacing-tight);
+    font-weight: var(--font-weight-semibold);
 }
 
 .subtitle {
     font-size: var(--font-size-xl);
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: var(--font-weight-normal);
 }
 
@@ -792,6 +792,7 @@ header h1 {
     border-radius: var(--radius-lg);
     padding: var(--space-32);
     box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--color-card-border);
 }
 
@@ -809,7 +810,7 @@ header h1 {
     margin-bottom: var(--space-8);
     font-weight: var(--font-weight-medium);
     color: var(--color-text);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
 }
 
 .input-group {
@@ -826,160 +827,132 @@ header h1 {
 select, input[type="text"] {
     width: 100%;
     padding: var(--space-12) var(--space-16);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     border-radius: var(--radius-base);
     font-size: var(--font-size-base);
     background: var(--color-surface);
     color: var(--color-text);
-    transition: all var(--duration-fast) var(--ease-standard);
+    transition: all var(--duration-normal) var(--ease-standard);
     margin-bottom: var(--space-10);
-    font-family: var(--font-family-base);
-}
-
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: var(--select-caret-light);
-    background-repeat: no-repeat;
-    background-position: right var(--space-12) center;
-    background-size: 16px;
-    padding-right: var(--space-32);
-}
-
-@media (prefers-color-scheme: dark) {
-    select {
-        background-image: var(--select-caret-dark);
-    }
-}
-
-[data-color-scheme="dark"] select {
-    background-image: var(--select-caret-dark);
-}
-
-[data-color-scheme="light"] select {
-    background-image: var(--select-caret-light);
 }
 
 select:focus, input[type="text"]:focus {
-    outline: var(--focus-outline);
+    outline: none;
     border-color: var(--color-primary);
     box-shadow: var(--focus-ring);
 }
 
 /* ============ Кнопки ============ */
 .btn {
-    padding: var(--space-12) var(--space-24);
+    padding: var(--space-16) var(--space-24);
     border: none;
     border-radius: var(--radius-base);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     font-weight: var(--font-weight-medium);
     cursor: pointer;
     transition: all var(--duration-normal) var(--ease-standard);
+    text-transform: none;
     display: inline-block;
     text-decoration: none;
     text-align: center;
     min-width: 150px;
     margin: var(--space-4);
-    font-family: var(--font-family-base);
 }
 
 .btn:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
-}
-
-.btn:focus-visible {
-    outline: none;
-    box-shadow: var(--focus-ring);
 }
 
 .btn-primary {
     background: var(--color-primary);
     color: var(--color-btn-primary-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover:not(:disabled) {
     background: var(--color-primary-hover);
-    transform: translateY(-1px);
-}
-
-.btn-primary:active:not(:disabled) {
-    background: var(--color-primary-active);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
     background: var(--color-secondary);
     color: var(--color-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover:not(:disabled) {
     background: var(--color-secondary-hover);
-    transform: translateY(-1px);
-}
-
-.btn-secondary:active:not(:disabled) {
-    background: var(--color-secondary-active);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-success {
     background: var(--color-success);
     color: var(--color-btn-primary-text);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-success:hover:not(:disabled) {
     background: var(--color-primary-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-warning {
     background: var(--color-warning);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-warning:hover:not(:disabled) {
     background: var(--color-orange-500);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-info {
     background: var(--color-info);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-info:hover:not(:disabled) {
     background: var(--color-slate-500);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-danger {
     background: var(--color-error);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
     min-width: 100px;
     padding: var(--space-8) var(--space-16);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-base);
     margin: var(--space-2);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-danger:hover:not(:disabled) {
     background: var(--color-red-500);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* ============ Ойыншылар тізімі ============ */
 .players-list {
     margin: var(--space-24) 0;
     padding: var(--space-24);
-    background: var(--color-secondary);
-    border-radius: var(--radius-md);
+    background: rgba(var(--color-teal-500-rgb), 0.1);
+    border-radius: var(--radius-lg);
     border-left: 4px solid var(--color-primary);
 }
 
 .players-list h3 {
     margin-bottom: var(--space-16);
     color: var(--color-text);
-    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
 }
 
@@ -993,10 +966,10 @@ select:focus, input[type="text"]:focus {
     justify-content: space-between;
     align-items: center;
     padding: var(--space-10) var(--space-16);
-    margin: var(--space-4) 0;
+    margin: var(--space-6) 0;
     background: var(--color-surface);
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-xs);
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-card-border);
 }
 
@@ -1032,7 +1005,7 @@ select:focus, input[type="text"]:focus {
 .player-info h2 {
     font-size: var(--font-size-2xl);
     color: var(--color-text);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
     font-weight: var(--font-weight-semibold);
 }
 
@@ -1048,17 +1021,17 @@ select:focus, input[type="text"]:focus {
 .round-info h3 {
     font-size: var(--font-size-xl);
     color: var(--color-text);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
     font-weight: var(--font-weight-semibold);
 }
 
 .timer-display {
     background: var(--color-info);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
     padding: var(--space-10) var(--space-20);
     border-radius: var(--radius-full);
     font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     min-width: 100px;
     text-align: center;
 }
@@ -1098,20 +1071,20 @@ select:focus, input[type="text"]:focus {
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--space-20);
     padding: var(--space-20);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     background: var(--color-surface);
-    transition: all var(--duration-normal) var(--ease-standard);
     color: var(--color-text);
+    transition: all var(--duration-normal) var(--ease-standard);
 }
 
 .hidden-text {
     color: transparent !important;
-    text-shadow: 0 0 8px rgba(var(--color-slate-900-rgb), 0.5);
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
     background: var(--color-secondary) !important;
 }
 
 .character-hint {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     color: var(--color-text-secondary);
     font-style: italic;
 }
@@ -1129,14 +1102,14 @@ select:focus, input[type="text"]:focus {
 .game-info {
     margin-top: var(--space-32);
     padding: var(--space-24);
-    background: var(--color-secondary);
-    border-radius: var(--radius-md);
+    background: rgba(var(--color-teal-500-rgb), 0.1);
+    border-radius: var(--radius-lg);
     border-left: 4px solid var(--color-primary);
 }
 
 .round-points {
     text-align: center;
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
     color: var(--color-primary);
     margin-bottom: var(--space-20);
@@ -1159,7 +1132,7 @@ select:focus, input[type="text"]:focus {
     left: 0;
     color: var(--color-primary);
     font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
 }
 
 /* ============ Нәтижелер кестесі ============ */
@@ -1183,7 +1156,7 @@ select:focus, input[type="text"]:focus {
     width: 100%;
     border-collapse: collapse;
     background: var(--color-surface);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
 }
@@ -1192,7 +1165,7 @@ select:focus, input[type="text"]:focus {
 #scoreTable td {
     padding: var(--space-16) var(--space-20);
     text-align: center;
-    border-bottom: 1px solid var(--color-card-border-inner);
+    border-bottom: 1px solid var(--color-card-border);
 }
 
 #scoreTable th {
@@ -1202,13 +1175,13 @@ select:focus, input[type="text"]:focus {
 }
 
 #scoreTable tr:hover {
-    background: var(--color-secondary);
+    background: rgba(var(--color-teal-500-rgb), 0.05);
 }
 
 #scoreTable tr:first-child td {
     background: var(--color-warning);
     font-weight: var(--font-weight-bold);
-    color: var(--color-btn-primary-text);
+    color: var(--color-white);
 }
 
 .final-controls {
@@ -1217,6 +1190,55 @@ select:focus, input[type="text"]:focus {
     justify-content: center;
     margin-top: var(--space-24);
     flex-wrap: wrap;
+}
+
+/* ============ Модальное окно ============ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-card-border);
+}
+
+.modal-content h3 {
+    margin-bottom: var(--space-16);
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+}
+
+.modal-content p {
+    margin-bottom: var(--space-24);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+}
+
+.modal-buttons .btn {
+    min-width: 120px;
 }
 
 /* ============ Респонсивті дизайн ============ */
@@ -1278,50 +1300,35 @@ select:focus, input[type="text"]:focus {
         width: auto;
         min-width: auto;
         padding: var(--space-10) var(--space-20);
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-base);
         margin: var(--space-10) auto;
         display: block;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal-buttons .btn {
+        width: 100%;
+        max-width: 200px;
     }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: var(--space-12);
-    }
-
     header h1 {
         font-size: var(--font-size-2xl);
     }
     
     .character-name {
         font-size: var(--font-size-2xl);
-        padding: var(--space-16);
     }
     
     .setup-panel,
     .game-panel,
     .results-panel {
-        padding: var(--space-16);
-    }
-
-    .character-display {
-        margin: var(--space-20) 0;
         padding: var(--space-20);
-    }
-
-    .game-header {
-        gap: var(--space-16);
-    }
-
-    .timer-display {
-        padding: var(--space-8) var(--space-16);
-        font-size: var(--font-size-base);
-    }
-
-    .btn {
-        padding: var(--space-10) var(--space-20);
-        font-size: var(--font-size-sm);
-        min-width: 120px;
     }
     
     #scoreTable th,
@@ -1335,12 +1342,27 @@ select:focus, input[type="text"]:focus {
         width: auto;
         min-width: auto;
         padding: var(--space-8) var(--space-16);
-        font-size: var(--font-size-xs);
+        font-size: var(--font-size-sm);
         margin: var(--space-8) auto;
     }
 
+    .modal-content {
+        padding: var(--space-20);
+        margin: var(--space-20);
+    }
+
+    .btn {
+        padding: var(--space-12) var(--space-20);
+        font-size: var(--font-size-base);
+        min-width: 120px;
+    }
+
+    .container {
+        padding: var(--space-12);
+    }
+
     .game-controls {
-        gap: var(--space-8);
+        gap: var(--space-12);
     }
 
     .setup-controls,
@@ -1348,18 +1370,28 @@ select:focus, input[type="text"]:focus {
         gap: var(--space-12);
     }
 
+    .timer-display {
+        font-size: var(--font-size-lg);
+        padding: var(--space-8) var(--space-16);
+    }
+
     .players-list {
-        margin: var(--space-16) 0;
-        padding: var(--space-16);
+        padding: var(--space-20);
+        margin: var(--space-20) 0;
     }
 
     .game-info {
+        padding: var(--space-20);
         margin-top: var(--space-24);
-        padding: var(--space-16);
     }
 
-    .round-points {
-        font-size: var(--font-size-base);
+    .character-display {
+        padding: var(--space-24);
+        margin: var(--space-24) 0;
+    }
+
+    .character-name {
+        padding: var(--space-16);
         margin-bottom: var(--space-16);
     }
 }
